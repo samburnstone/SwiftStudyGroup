@@ -106,7 +106,6 @@ for nerd in nerds {
     println(nerd)
 }
 
-//: Alternatively we could use Swift's version of the classic for (i = 0; i < 10; i++)
 //: ..< excludes last number
 for index in 0..<nerds.count {
     println(index)
@@ -118,6 +117,11 @@ for index in 0...nerds.count {
     println(index)
 }
 
+//: Alternatively we could use Swift's version of the classic for (i = 0; i < 10; i++)
+for var index = 0; index < 3; ++index {
+    println("index is \(index)")
+}
+
 //: While loops are very familiar
 var i = 0
 while i < nerds.count {
@@ -126,7 +130,7 @@ while i < nerds.count {
 }
 
 //: Switch statements are a lot more powerful than they were in Objective-C.
-//: Note that there's no **break** statement - no 'fall-through' to next case and that a *default* case is required
+//: Note that there's no **break** statement required - no 'fall-through' to next case and that a *default* case is required
 let nerd = "Sam"
 
 switch nerd {
@@ -135,3 +139,39 @@ switch nerd {
     println("You should reconsider your choice of nerd!")
 }
 
+let boardPosition = (0, -1)
+
+switch boardPosition {
+case (0, 0): println("You haven't moved yet")
+case (_, 1...10): println("Your position on y axis is greater than 0!!!")
+default: println("You're off the board moron!")
+}
+
+//: ## Functions
+//: Swift treats functions as *first-class citizens*, effectively meaning they can be passed around like objects and structs.
+func sayHelloTo(name: String = "Sam") {
+    println("Hello \(name)")
+}
+
+sayHelloTo() // Use default parameter
+sayHelloTo(name: "Chris")
+
+//: Swift also has support for tuples
+func getPrices() -> (Double, Double) {
+    return (0.79, 1.50)
+}
+
+let prices = getPrices()
+
+//: Due to this first-class citizen thing, we can assign functions to variables and pass them around.
+
+func makeIncrementer() -> (Int -> Int) {
+    func addOne(number: Int) -> Int {
+        return 1 + number
+    }
+    
+    return addOne
+}
+
+let incrementer = makeIncrementer()
+incrementer(7)
