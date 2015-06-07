@@ -37,7 +37,8 @@ let 🐷 = "Oink"
 
 println(🐷)
 
-//: ## Due to Swift being an inherently *safe* language, every variable (constant or otherwise) must have a value.
+//: ## Optionals
+//: Due to Swift being an inherently *safe* language, every variable (constant or otherwise) must have a value.
 //: Optionals provide an indication when a value could possibly be nil - if it ain't optional then it's almost certainly not nil
 var optionalString: String?
 
@@ -79,4 +80,58 @@ if let animal = stringToUnwrap {
     println(animal) // No longer 'optional'
 }
 
+//: ## Collections
+
+//: ### Arrays
+//: Arrays (as with any other object/struct/enum) can be constant or 'variable'
+var nerds = ["Sam", "Rob", "Ryan", "Chris", "Andy"] // This is inferred to be of type [String]
+nerds[0] // Use subscripting
+nerds.append("James")
+
+let untouchableNerds = nerds
+// COMPILER ERROR: untouchableNerds.append("Dan")
+
+//: ### Dictionaries
+var occupations = [
+    "Rob" : "Nerd",
+    "Chris" : "Loser"
+] // This is inferred to be of type [String : String]
+
+//: N.B. Sets were added in version 1.2 of the language. Some collections do not yet have a Swift implementation, but we can continue using the Objective-C implementations for now.
+
+//: ## Control Flow
+
+//: We can iterate over items in an array using a for in loop
+for nerd in nerds {
+    println(nerd)
+}
+
+//: Alternatively we could use Swift's version of the classic for (i = 0; i < 10; i++)
+//: ..< excludes last number
+for index in 0..<nerds.count {
+    println(index)
+    println(nerds[index])
+}
+
+//: ... includes last number
+for index in 0...nerds.count {
+    println(index)
+}
+
+//: While loops are very familiar
+var i = 0
+while i < nerds.count {
+    println(i)
+    i++
+}
+
+//: Switch statements are a lot more powerful than they were in Objective-C.
+//: Note that there's no **break** statement - no 'fall-through' to next case and that a *default* case is required
+let nerd = "Sam"
+
+switch nerd {
+    case "Sam": println("A fine choice of nerd!")
+    default: // Required
+    println("You should reconsider your choice of nerd!")
+}
 
