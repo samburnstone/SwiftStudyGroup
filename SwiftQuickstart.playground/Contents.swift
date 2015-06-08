@@ -1,8 +1,6 @@
 //: ## Quickfire introduction to Swift
 //: Inspired by http://learnxinyminutes.com/docs/swift/
-
-//: Swift imports all files within the current module automcatically
-
+//: Swift imports all files within the current module automatically
 //: When using other modules, we import them like:
 import UIKit
 
@@ -16,8 +14,8 @@ let constant = 40
 // COMPILER ERROR: constant = 10
 
 //: We don't have to immediately assign values to a constant, however once it has been assigned a value, we can't reassign one
-//: We also need to ensure it has a value before we can use it (we'll get a ghastly compilation error otherwise!)
-//: N.B. Swift tries its best to **infer** the type being assigned to a constant/variable. However, when we're not assigning anything immediately, we need to give it a bit of a helping hand
+//: We also need to ensure it has a value before we can use it (we'll get a ghastly compilation error otherwise!).
+//: N.B. Swift tries its best to **infer** the type being assigned to a constant/variable. However, when we're not assigning anything immediately, we need to give it a bit of a helping hand.
 let animal = "Beetle"
 let numberOfLegs: UInt
 
@@ -28,7 +26,7 @@ else {
     numberOfLegs = 2
 }
 
-//: We can use *string interpolation* to directly print out values into a string. Objective-C develops rejoice!!!
+//: We can use *string interpolation* to directly print out values into a string. Objective-C developers rejoice!!!
 println("A \(animal) has \(numberOfLegs) legs")
 
 //: A small nicety of Swift is the ability to use any unicode character for a variable name
@@ -51,11 +49,11 @@ if optionalString == "No longer nil" {
     println("The optional contains a value")
 }
 
-//: If a variable is not marked as being optional (indicated by ?) then nil cannot be assigned to it
+//: If a variable is not marked as being optional (indicated by *?*) then nil cannot be assigned to it
 var nonNilString = "Are you all still awake?"
 // COMPILER ERROR: nonNilString = nil
 
- //: **Unwrapping** optionals to get at the sweet, sweet value contained within it.
+//: **Unwrapping** optionals to get at the sweet, sweet value contained within it.
 // So we can do this:
 if optionalString != nil {
     // optional is not nil
@@ -175,3 +173,70 @@ func makeIncrementer() -> (Int -> Int) {
 
 let incrementer = makeIncrementer()
 incrementer(7)
+
+//: ## Closures
+//: Let's take our variable nerds array from earlier and use that to demonstrate closures
+
+println(nerds)
+
+nerds.map({
+    (nerd: String) -> String in
+    let result = nerd.uppercaseString
+    return result
+})
+
+//: When we know the type being passed into the *map* function we can simplify this
+nerds.map({ nerd in nerd.lowercaseString })
+
+//: Let's see this used in another case.
+//: N.B. notice that **sorted** is a generic function that can operate on any sequence as long as the items within that sequence confom to the *comparable* protocol
+let sortedNames = sorted(nerds, { (s1: String, s2: String) -> Bool in s1 < s2 })
+println(sortedNames)
+
+//: This can be shortened as the compiler can infer the input and return types
+println(nerds)
+let shortcutSortedNames = sorted(nerds, <)
+println(shortcutSortedNames)
+
+//: ## Classes
+
+class Person: Printable {
+    let name: String
+    var age: UInt16?
+    
+    var description: String {
+        get {
+            
+            let ageString: String
+            
+            if let age = age {
+                ageString = "\(age)"
+            }
+            else {
+                ageString = "I beg your pardon?!"
+            }
+            
+            return "Name: \(name) Age: \(ageString)"
+        }
+    }
+    
+    init?(name: String, age: UInt16?) {
+        
+        // Before we can return anything, we must assign values to non-optional properties
+        self.name = name
+        self.age = age
+        
+        if name == "Rob" {
+            return nil
+        }
+    }
+    
+}
+
+let sam = Person(name: "Sam", age: 22)
+println("Hello \(sam)")
+Person(name: "Rob", age: nil)
+
+let mum = Person(name: "Big Momma", age: nil)
+println("Hello \(mum)")
+
