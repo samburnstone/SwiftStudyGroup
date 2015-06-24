@@ -25,7 +25,7 @@ func generateCharacterArrayFromCollection<T: CollectionType>(collection: T) -> [
     return charactersArray
 }
 
-//: Tests
+// Tests
 verifyPalindrome("hannah") // Expect true
 verifyPalindrome("sam") // Expect false
 verifyPalindrome("thisisiht") // Expect true
