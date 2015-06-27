@@ -1,6 +1,10 @@
-//: Swift Homework
+/*: 
+# Swift Homework
 
-//: Palindrome
+----
+
+## Palindrome
+*/
 
 func verifyPalindrome(stringToValidate: String) -> Bool {
     let charactersArray = generateCharacterArrayFromCollection(stringToValidate.characters)

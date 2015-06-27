@@ -1,8 +1,9 @@
 //: [Previous](@previous)
+/*:
+## Balanced Brackets
+*/
 
 import Foundation
-
-//: Brackets
 
 func verifyValidBracketString(bracketedString: String) -> Bool {
     var openBracketStack = [Character]()

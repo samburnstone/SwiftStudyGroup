@@ -1,6 +1,7 @@
 //: [Previous](@previous)
-
-//: FizzBuzz
+/*:
+## FizzBuzz
+*/
 let maximumValue = 100
 
 for index in 1...maximumValue {
