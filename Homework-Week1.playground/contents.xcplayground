@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='osx' auto-termination-delay='20' requires-full-environment='true' display-mode='raw'/>
+<playground version='6.0' target-platform='osx' auto-termination-delay='20' requires-full-environment='true' display-mode='raw'>
+    <pages>
+        <page name='Palindrome'/>
+        <page name='FizzBuzz'/>
+        <page name='BalancedBrackets'/>
+    </pages>
+</playground>

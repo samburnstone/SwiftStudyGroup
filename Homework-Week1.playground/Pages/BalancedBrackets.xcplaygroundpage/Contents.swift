@@ -4,12 +4,10 @@ import Foundation
 
 //: Brackets
 
-func verifyValidBracketString(bracketedString: String) -> Bool
-{
+func verifyValidBracketString(bracketedString: String) -> Bool {
     var openBracketStack = [Character]()
     
-    func openBracketCharacterFromClosedBracketCharacter(closedBracketCharacter: Character) -> Character?
-    {
+    func openBracketCharacterFromClosedBracketCharacter(closedBracketCharacter: Character) -> Character? {
         switch closedBracketCharacter {
         case "}": return "{"
         case "]": return "["
@@ -20,25 +18,20 @@ func verifyValidBracketString(bracketedString: String) -> Bool
         return nil
     }
     
-    for character in bracketedString.characters
-    {
-        switch character
-        {
+    for character in bracketedString.characters {
+        switch character {
         case "{", "(", "[":
             openBracketStack.insert(character, atIndex: 0)
             openBracketStack
         case "}", ")", "]":
             // Compare to item at top of stack
-            if let characterAtTopOfStack = openBracketStack.first
-            {
-                if let openBracketCharacter = openBracketCharacterFromClosedBracketCharacter(character)
-                {
+            if let characterAtTopOfStack = openBracketStack.first {
+                if let openBracketCharacter = openBracketCharacterFromClosedBracketCharacter(character) {
                     if openBracketCharacter != characterAtTopOfStack {
                         return false
                     }
                 }
-            } else
-            {
+            } else {
                 return false
             }
             
@@ -50,8 +43,7 @@ func verifyValidBracketString(bracketedString: String) -> Bool
     }
     
     // Check whether we still have brackets that haven't been popped off the stack
-    if !openBracketStack.isEmpty
-    {
+    if !openBracketStack.isEmpty {
         return false
     }
     

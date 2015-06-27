@@ -2,16 +2,14 @@
 
 //: Palindrome
 
-func verifyPalindrome(stringToValidate: String) -> Bool
-{
+func verifyPalindrome(stringToValidate: String) -> Bool {
     let charactersArray = generateCharacterArrayFromCollection(stringToValidate.characters)
     let reverseCharactersArray = generateCharacterArrayFromCollection(charactersArray.reverse())
     
     return charactersArray == reverseCharactersArray
 }
 
-func generateCharacterArrayFromCollection<T: CollectionType>(collection: T) -> [Character]
-{
+func generateCharacterArrayFromCollection<T: CollectionType>(collection: T) -> [Character] {
     var charactersArray = [Character]()
     
     for item in collection {
