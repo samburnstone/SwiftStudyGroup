@@ -49,4 +49,55 @@ stack.pop()
 //let itemsAdded = ["{", "["]
 // However, if we create the array inline, Swift is smart enough to infer we want to compare an array of Characters
 stack.items == ["{", "["]
+
+//: Here's the real stuff
+func verifyValidBracketString(bracketedString: String) -> Bool {
+    var bracketStack = Stack<Character>()
+    
+    func openBracketCharacterFromClosedBracketCharacter(closedBracketCharacter: Character) -> Character? {
+        switch closedBracketCharacter {
+        case "}": return "{"
+        case "]": return "["
+        case ")": return "("
+        default: break
+        }
+        
+        return nil
+    }
+    
+    for character in bracketedString.characters {
+        switch character {
+        case "{", "(", "[":
+            bracketStack.push(character)
+        case "}", ")", "]":
+            // Compare to item at top of stack
+            if let characterAtTopOfStack = bracketStack.pop() {
+                if let openBracketCharacter = openBracketCharacterFromClosedBracketCharacter(character) {
+                    if openBracketCharacter != characterAtTopOfStack {
+                        return false
+                    }
+                }
+            } else {
+                return false
+            }
+        default: break
+        }
+    }
+    
+    // Check whether we still have brackets that haven't been popped off the stack
+    if !bracketStack.isEmpty {
+        return false
+    }
+    
+    return true
+}
+
+//: Tests
+verifyValidBracketString("")
+verifyValidBracketString("()")
+verifyValidBracketString("[]")
+verifyValidBracketString("(([]{}))")
+
+verifyValidBracketString("{") == false
+verifyValidBracketString("{{{{{]") == false
 //: [Next](@next)
