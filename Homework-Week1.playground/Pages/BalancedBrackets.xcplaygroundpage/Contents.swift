@@ -50,13 +50,13 @@ func verifyValidBracketString(bracketedString: String) -> Bool {
     return true
 }
 
-// Tests
-verifyValidBracketString("") // Expect true
-verifyValidBracketString("()") // Expect true
-verifyValidBracketString("[]") // Expect true
-verifyValidBracketString("(([]{}))") // Expect true
+//: Tests
+verifyValidBracketString("")
+verifyValidBracketString("()")
+verifyValidBracketString("[]")
+verifyValidBracketString("(([]{}))")
 
-verifyValidBracketString("{") // Expect false
-verifyValidBracketString("{{{{{]") // Expect false
+verifyValidBracketString("{") == false
+verifyValidBracketString("{{{{{]") == false
 
 //: [Next](@next)
