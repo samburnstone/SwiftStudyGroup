@@ -4,5 +4,6 @@
         <page name='Palindrome'/>
         <page name='FizzBuzz'/>
         <page name='BalancedBrackets'/>
+        <page name='Improved BalancedBrackets'/>
     </pages>
 </playground>
