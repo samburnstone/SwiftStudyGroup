@@ -37,7 +37,6 @@ func verifyValidBracketString(bracketedString: String) -> Bool {
             }
             
             openBracketStack.removeAtIndex(0)
-            print("Removing first item")
             openBracketStack
         default: break
         }
