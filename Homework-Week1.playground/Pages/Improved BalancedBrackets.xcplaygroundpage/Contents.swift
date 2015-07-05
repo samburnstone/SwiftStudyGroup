@@ -16,12 +16,16 @@ extension Array {
 struct Stack<T> {
     private var items = [T]()
     
+    var isEmpty: Bool {
+        get  { return items.count == 0 }
+    }
+    
     mutating func push(item: T) {
         items.prepend(item)
     }
     
     mutating func pop() -> T? {
-    
+        
         if let topItem = items.first {
             items.removeAtIndex(0)
             return topItem
