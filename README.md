@@ -11,6 +11,14 @@ This repo contains projects developed for the Scott Logic Swift study group.
 
 These exercises focussed on the basics of Swift (operators, basic Swift standard library features, control flow e.t.c).
 
+### StructFun.playground
+- Structs
+- Custom operators
+
+This exercise adds custom operators to make working with CGPoints easier (point1 + point2). 
+
+It then extends this by creating a custom type (a struct) to represent a matrix. The * operand can be used with this matrix type to multiply it by a scalar value.
+
 ## Interesting Links
 
 [Structs vs Classes](http://faq.sealedabstract.com/structs_or_classes/)
