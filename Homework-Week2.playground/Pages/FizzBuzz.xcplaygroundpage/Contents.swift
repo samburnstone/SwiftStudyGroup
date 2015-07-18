@@ -14,30 +14,30 @@ func fizzBuzz(f: outputResult) {
     }
 }
 
+func fizz(index: Int) -> String {
+    if index % 3 == 0 {
+        return "fizz"
+    }
+    return ""
+}
+
+func buzz(index: Int) -> String {
+    if index % 5 == 0 {
+        return "buzz"
+    }
+    return ""
+}
+
 //: Example without using trailing closure
 fizzBuzz({
     index in
-    var output = ""
-    if index % 3 == 0 {
-        output += "fizz"
-    }
-    if index % 5 == 0 {
-        output += "buzz"
-    }
-    return output
+    return fizz(index) + buzz(index)
 })
 
 //: Example using trailing closure
 fizzBuzz() {
     index in
-    var output = ""
-    if index % 3 == 0 {
-        output += "fizz"
-    }
-    if index % 5 == 0 {
-        output += "buzz"
-    }
-    return output
+    return fizz(index) + buzz(index)
 }
 
 //: [Next](@next)
