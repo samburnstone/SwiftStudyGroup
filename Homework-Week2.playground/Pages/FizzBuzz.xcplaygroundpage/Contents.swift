@@ -10,7 +10,7 @@ typealias outputResult = Int -> String
 //: Now for the core function
 func fizzBuzz(f: outputResult) {
     for i in 1...maximumValue {
-        f(i)
+        "\(i) : \(f(i))"
     }
 }
 
@@ -34,10 +34,9 @@ fizzBuzz({
     return fizz(index) + buzz(index)
 })
 
-//: Example using trailing closure
+//: Example using trailing closure and using shorthand argument name
 fizzBuzz() {
-    index in
-    return fizz(index) + buzz(index)
+    return fizz($0) + buzz($0)
 }
 
 //: [Next](@next)
