@@ -5,5 +5,6 @@
         <page name='FizzBuzz'/>
         <page name='BalancedBrackets'/>
         <page name='Improved BalancedBrackets'/>
+        <page name='Closures'/>
     </pages>
 </playground>
