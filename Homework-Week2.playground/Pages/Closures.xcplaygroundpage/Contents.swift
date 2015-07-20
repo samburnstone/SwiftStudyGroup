@@ -43,6 +43,12 @@ class Account {
         balance -= amount
         success()
     }
+    
+    func withdraw(amounts:Double...) {
+        for amount in amounts {
+            withdraw(amount, success: {}, failure: {})
+        }
+    }
 }
 
 func printSuccessful() {
@@ -74,6 +80,9 @@ samAccount.withdraw(10, success: {
 }
 result
 
-
+let dodgyAccount = Account()
+dodgyAccount.deposit(50)
+dodgyAccount.withdraw(5, 10, 5, 20)
+print(dodgyAccount.balance)
 
 //: [Next](@next)
