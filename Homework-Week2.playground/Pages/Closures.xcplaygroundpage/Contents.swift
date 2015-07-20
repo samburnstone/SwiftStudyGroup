@@ -2,6 +2,9 @@
 
 import Foundation
 
+//: ## Closures
+//: See [Naughty titled site](http://fuckingclosuresyntax.com/) for more detail
+
 //: Example taken from Swift reference guide
 
 let digitNames = [
@@ -70,5 +73,7 @@ samAccount.withdraw(10, success: {
     print("No money")
 }
 result
+
+
 
 //: [Next](@next)
