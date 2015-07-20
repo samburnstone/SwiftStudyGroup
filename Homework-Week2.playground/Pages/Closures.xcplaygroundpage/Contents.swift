@@ -34,7 +34,7 @@ class Account {
     
     func withdraw(amount: Double, success: AccountHolderReaction, failure: AccountHolderReaction) {
         // Check the peasant has some funds in their account
-        guard balance > 0 else { failure(); return }
+        guard balance - amount > 0 else { failure(); return }
         
         // Rich peasant, therefore allow them to withdraw
         balance -= amount
@@ -54,5 +54,21 @@ let samAccount = Account()
 samAccount.withdraw(50, success: printSuccessful, failure: printFailure)
 samAccount.deposit(100)
 samAccount.withdraw(80, success: printSuccessful, failure: printFailure)
+
+var result: String = ""
+
+samAccount.withdraw(50, success: {
+    result = "Got money!"
+}, failure: {
+    result = "No money!"
+})
+result
+
+samAccount.withdraw(10, success: {
+    result = "Got money!"
+}) {
+    print("No money")
+}
+result
 
 //: [Next](@next)
