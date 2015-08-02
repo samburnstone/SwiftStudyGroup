@@ -110,16 +110,15 @@ class Game {
             
         case .Numeric(value: 40):
             
-            guard let opponent = retrieveOpponent(to: player) else { return .Error }
-            guard var opponentScore = playerScores[opponent] else { return .Error }
+            guard let opponent = retrieveOpponent(to: player) else { return .Error } // In a real life application, these would probably be thrown as errors
+            guard let opponentScore = playerScores[opponent] else { return .Error }
             
+            // Slightly tricky bit - we need to work out if the player's opponent is currently on 'advantage'
             switch opponentScore {
             case .Numeric(value: 40): currentPlayerScore = .Advantage
-            case .Advantage: opponentScore = .Numeric(value: 40)
+            case .Advantage: playerScores[opponent] = .Numeric(value: 40) // Opponent was on advantage, therefore reduce
             default: return .Won(winningPlayer: player)
             }
-            
-            playerScores[opponent] = opponentScore
             
         case .Advantage: return .Won(winningPlayer: player)
             
@@ -182,15 +181,15 @@ let wimbledonFinal = Match(players: [superSerb, swissWithAHeadband])
 
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.awardPointTo(superSerb)
-wimbledonFinal.awardPointTo(superSerb)
-
-wimbledonFinal.awardPointTo(swissWithAHeadband)
-wimbledonFinal.awardPointTo(swissWithAHeadband)
-wimbledonFinal.awardPointTo(swissWithAHeadband)
-
 wimbledonFinal.awardPointTo(superSerb) // What a beast!
-wimbledonFinal.currentGame()?.playerScores
+
 wimbledonFinal.awardPointTo(swissWithAHeadband)
+wimbledonFinal.awardPointTo(swissWithAHeadband)
+wimbledonFinal.awardPointTo(swissWithAHeadband) // Nice comeback Roger!
+
+wimbledonFinal.awardPointTo(superSerb)
+wimbledonFinal.currentGame()?.playerScores
+wimbledonFinal.awardPointTo(swissWithAHeadband) // On a kinfe-edge!
 wimbledonFinal.currentGame()?.playerScores
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.awardPointTo(superSerb)
