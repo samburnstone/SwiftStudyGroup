@@ -2,7 +2,7 @@
 
 import Foundation
 
-class Player: Hashable {
+class Player {
     
     // Enum time
     enum PlayingStyle {
@@ -24,13 +24,6 @@ class Player: Hashable {
         }
     }
     
-    // Implement Hashable protocol so we can use Player in Dictionary
-    var hashValue: Int {
-        get {
-            return self.name.hashValue
-        }
-    }
-    
     init(name: String, dateOfBirth: NSDate, playingStyle: PlayingStyle = .RightHanded) {
         self.name = name
         self.dateOfBirth = dateOfBirth
@@ -47,6 +40,16 @@ class Player: Hashable {
         }
         else {
             return nil
+        }
+    }
+}
+
+//: It's recommended to use extensions to separate protocol implementations - below we have *Hashable* and *CustomStringConvertible*
+extension Player: Hashable {
+    // Implement Hashable protocol so we can use Player in Dictionary
+    var hashValue: Int {
+        get {
+            return self.name.hashValue
         }
     }
 }
