@@ -51,11 +51,20 @@ class Player: Hashable {
     }
 }
 
+extension Player: CustomStringConvertible {
+    var description: String {
+        get {
+            return name
+        }
+    }
+}
+
 //: We need to implement the **Equatable** protocol so we can use Player as a key in a Dictionary later on
 func ==(lhs: Player, rhs: Player) -> Bool {
     return lhs.name == rhs.name
 }
 
+//: Let's create a few Tennis Players
 let grumpyScot = Player(name: "Andy Murray", dateOfBirth: "1987-05-15")
 grumpyScot?.age
 let swissWithAHeadband = Player(name: "Roger Federer", dateOfBirth: "1981-08-08")!
@@ -89,7 +98,10 @@ class Game {
     // Create an empty score dictionary
     var playerScores = PlayerScores()
     
+    var state: GameState
+    
     init(players: [Player]) {
+        state = .InProgress
         players.map({
             playerScores[$0] = .Numeric(value: 0)
         })
@@ -117,10 +129,10 @@ class Game {
             switch opponentScore {
             case .Numeric(value: 40): currentPlayerScore = .Advantage
             case .Advantage: playerScores[opponent] = .Numeric(value: 40) // Opponent was on advantage, therefore reduce
-            default: return .Won(winningPlayer: player)
+            default: state = .Won(winningPlayer: player); return state
             }
             
-        case .Advantage: return .Won(winningPlayer: player)
+        case .Advantage: state = .Won(winningPlayer: player); return state
             
         default: break
         }
@@ -173,12 +185,36 @@ class Match {
     func currentGame() -> Game? {
         return games.last
     }
-    
-    // TODO: Implement CustomStringConvertible and use reduce to determine number of games a player has won
+}
+
+extension Match: CustomStringConvertible {
+    var description: String {
+        get {
+            // TODO: This counts all games won - count games won by each player and return nicely formatted string
+            var outputString = ""
+            
+            
+            for player in players {
+                let gameCount = games.reduce(0) {
+                    (numGames, game) in
+                    switch game.state {
+                    case .Won(player): return numGames + 1
+                    default: return numGames
+                    }
+                }
+                
+                outputString += "\(player) \(gameCount)\n"
+            }
+            
+            
+            return outputString
+        }
+    }
 }
 
 let wimbledonFinal = Match(players: [superSerb, swissWithAHeadband])
 
+//: First Game
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.awardPointTo(superSerb) // What a beast!
@@ -189,10 +225,19 @@ wimbledonFinal.awardPointTo(swissWithAHeadband) // Nice comeback Roger!
 
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.currentGame()?.playerScores
-wimbledonFinal.awardPointTo(swissWithAHeadband) // On a kinfe-edge!
+wimbledonFinal.awardPointTo(swissWithAHeadband) // On a knife-edge!
 wimbledonFinal.currentGame()?.playerScores
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.awardPointTo(superSerb)
 wimbledonFinal.currentGame()?.playerScores // Game has been reset
 
+// What's the current score, Sue Barker?
+print(wimbledonFinal)
 
+//: Let's have another game
+wimbledonFinal.awardPointTo(swissWithAHeadband)
+wimbledonFinal.awardPointTo(swissWithAHeadband)
+wimbledonFinal.awardPointTo(swissWithAHeadband)
+wimbledonFinal.awardPointTo(swissWithAHeadband)
+
+print(wimbledonFinal)
