@@ -9,6 +9,12 @@ struct SimpleRange {
     var length: UInt {
         return end - start
     }
+    
+    init (start: UInt, end: UInt) {
+        guard end >= start else { fatalError("End must be greater than or equal to start") }
+        self.start = start
+        self.end = end
+    }
 }
 
 let smallRange = SimpleRange(start: 0, end: 10)
@@ -16,5 +22,8 @@ smallRange.length
 
 let largeRange = SimpleRange(start: 10, end: 15)
 largeRange.length
+
+// ERROR: let incorrectRange = SimpleRange(start: 10, end: 3)
+
 
 //: [Next](@next)
