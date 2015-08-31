@@ -1,12 +1,12 @@
 //: Something simple to start us off
 //: A basic Range struct with a computed property
 struct SimpleRange {
-    let start: Int
-    let end: Int
+    let start: UInt
+    let end: UInt
     
     // Computed property.
     // Note we don't have to explicitly use: get { return endIndex - startIndex } as Swift infers it's a readonly property
-    var length: Int {
+    var length: UInt {
         return end - start
     }
 }
