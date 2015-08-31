@@ -35,7 +35,7 @@ protocol ThreeDShape {
 
 //: Create a struct that conforms to this protocol
 struct Cube: ThreeDShape {
-    var sideLength: Double = 10
+    var sideLength = 0.0
     
     var volume: Double {
         return pow(sideLength, 3)
