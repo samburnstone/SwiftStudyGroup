@@ -49,6 +49,11 @@ struct Queue <Element> {
     func peek() -> Element? {
         return items.first
     }
+    
+    // Mildly crazy... we can assign an entirely new instance to self
+    mutating func empty() {
+        self = Queue<Element>()
+    }
 }
 
 // Create our queue and fill it with doubles
@@ -58,5 +63,14 @@ queue.push(1.0)
 queue.peek()
 queue.pop()
 queue.pop()
-queue.pop()
+queue.pop() // Phew, we haven't crashed
+
+queue.push(10)
+queue.push(20)
+
+queue.items
+
+queue.empty()
+
+queue.items // See... we're empty!
 //: [Next](@next)
