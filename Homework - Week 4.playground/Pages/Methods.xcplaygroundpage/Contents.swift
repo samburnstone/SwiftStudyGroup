@@ -2,15 +2,16 @@
 import UIKit // Import UIKit so we can use CGPoints
 
 //: Class / static method
-class Adder {
+class AdderClass {
     
-    // Type methods can only be used on clases
+    // Type method
     class func addNumbers(num1: Double, num2: Double) -> Double {
         return num1 + num2
     }
     
+    // Instance method
     func addNumbers(num1 num1: Double, num2: Double) -> Double {
-        return Adder.addNumbers(num1, num2: num2)
+        return AdderClass.addNumbers(num1, num2: num2)
     }
     
     func addNumber(num1: Double, toNumber num2: Double, numberOfTimes: UInt) -> Double {
@@ -20,13 +21,28 @@ class Adder {
 }
 
 // Type method
-Adder.addNumbers(10, num2: 5)
+AdderClass.addNumbers(10, num2: 5)
 
 // Instance method
-let adder = Adder()
+let adder = AdderClass()
 adder.addNumbers(num1: 10, num2: 2)
 
 adder.addNumber(1, toNumber: 0, numberOfTimes: 10)
+
+//: Type methods using structs
+
+struct AdderStruct {
+    
+    // Note we're using static func, rather than class func
+    static func addNumbers(num1: Double, num2: Double) -> Double {
+        return num1 + num2
+    }
+    
+}
+
+AdderStruct.addNumbers(10, num2: 5)
+
+// Type methods can also be added to enumerations as well
 
 //: Structs - mutating functions
 
