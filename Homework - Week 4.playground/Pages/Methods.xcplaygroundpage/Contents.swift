@@ -4,7 +4,7 @@ import UIKit // Import UIKit so we can use CGPoints
 //: Class / static method
 class Adder {
     
-    // Class funcs can only be used on clases
+    // Type methods can only be used on clases
     class func addNumbers(num1: Double, num2: Double) -> Double {
         return num1 + num2
     }
@@ -19,7 +19,7 @@ class Adder {
     
 }
 
-// Class method
+// Type method
 Adder.addNumbers(10, num2: 5)
 
 // Instance method
