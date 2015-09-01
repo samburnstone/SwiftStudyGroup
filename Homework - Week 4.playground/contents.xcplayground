@@ -4,5 +4,6 @@
         <page name='ComputedProperty'/>
         <page name='LazyProperty'/>
         <page name='PropertyObservers'/>
+        <page name='Methods'/>
     </pages>
 </playground>
