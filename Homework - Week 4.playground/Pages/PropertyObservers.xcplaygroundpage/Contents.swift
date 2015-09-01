@@ -7,9 +7,15 @@
 struct Doubler {
     
     var number: Int? {
-        // Observers
+        
+        // By default,
         didSet {
-            recalculate()
+            if oldValue != number {
+                recalculate()
+            }
+            else {
+                print("You've just calculated the double of \(number) - stop wasting energy!")
+            }
         }
         
         // By default, value that will be set is passed as constant 'newValue', we can change the name of this however if we wish
@@ -31,4 +37,5 @@ struct Doubler {
 //: Put it into action
 var doubler = Doubler()
 doubler.number = 10
+doubler.number = 5
 doubler.number = 5
