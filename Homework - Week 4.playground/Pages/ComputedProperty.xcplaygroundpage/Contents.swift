@@ -60,4 +60,16 @@ struct Sphere: ThreeDShape {
 var sphere = Sphere(radius: 5)
 sphere.volume
 
+//: Quick bit on static properties. They need to be defined within a type - can't be global like in Objective-c
+//: _____________
+//: **Note:** Apple calls these *Type Properties*
+
+// ERROR: static var text = "HELP"
+
+struct Square {
+    static let numberOfSides = 4
+}
+
+Square.numberOfSides
+
 //: [Next](@next)

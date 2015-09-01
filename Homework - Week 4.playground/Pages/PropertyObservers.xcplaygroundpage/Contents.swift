@@ -1,3 +1,5 @@
+//: [Previous](@previous)
+
 //:## Property Observers
 //:_________
 //: We can use didSet and willSet to 'observe' a property.
@@ -8,7 +10,8 @@ struct Doubler {
     
     var number: Int? {
         
-        // By default,
+        // By default, previous value is passed in as 'oldValue'
+        // Note, that if we set number within didSet this wouldn't cause the observer to be called again
         didSet {
             if oldValue != number {
                 recalculate()
