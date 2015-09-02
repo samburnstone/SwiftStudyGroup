@@ -24,7 +24,7 @@ array
 
 //: Let's try and create a basic Dictionary/Map
 
-struct PoorMansDictionary{
+struct PoorMansDictionary {
     typealias Key = String
     typealias Value = Int
     
@@ -33,25 +33,51 @@ struct PoorMansDictionary{
     
     subscript(key: Key) -> Int? {
         get {
+            // Check if key exists in keys array
             guard let indexOfKey = keys.indexOf(key) else { return nil }
             return values[indexOfKey]
         }
         
+        // setter is smart enough to know that 'newValue' should be of type Int?
         set {
-            keys.append(key)
-            values.append(newValue!)
+            
+            // If newValue is nil, then remove key and value from dictionary
+            guard let newValue = newValue else {
+                if let indexOfKey = keys.indexOf(key) {
+                    keys.removeAtIndex(indexOfKey)
+                    values.removeAtIndex(indexOfKey)
+                }
+                return
+            }
+            
+            if let indexOfKey = keys.indexOf(key) {
+                // Update the value associated with the key
+                values[indexOfKey] = newValue
+            }
+            else {
+                // In this case, we have a brand new key, value pair
+                keys.append(key)
+                values.append(newValue)
+            }
         }
     }
     
 }
 
-var dict = PoorMansDictionary()
-dict["One"] = 1
-dict["One Hundred"] = 100
-dict["Five Thousand"] = 5000
+var agesDict = PoorMansDictionary()
+agesDict["Sam"] = 22
+agesDict["Chris"] = 27
+agesDict["Rob"] = -2
 
-dict["Five Thousand"]
-dict["One"]
-dict["Two"] // Doesn't exist in our dictionary
+agesDict["Sam"]
+agesDict["Ryan"] // Doesn't exist in our dictionary
+
+// Remove from our dictionary by assigning nil
+agesDict["Chris"] = nil
+agesDict["Chris"] // No longer exists
+
+// Update a preexisting key with new value
+agesDict["Rob"] = 26
+agesDict["Rob"]
 
 //: [Next](@next)
