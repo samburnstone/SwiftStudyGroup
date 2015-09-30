@@ -56,47 +56,79 @@ enum TechThrobError: ErrorType {
     case TechThrobNotFound
 }
 
+enum CGError: ErrorType {
+    case ChrisGrantNotFound
+}
+
 func chrisIsATechThrob() throws -> Bool {
-    return true
+    //return true
     
     throw TechThrobError.TechThrobNotFound
 }
 
 // Know that chrisIsATechThrob will always be true, therefore...
-let result = try! chrisIsATechThrob() // Prevents propragation of error messages
+let result = try chrisIsATechThrob() // Prevents propragation of error messages
 
 //: Cleaning up using DEFER
+//
+//enum FileReadError: ErrorType {
+//    case FileNotFound
+//    case FileCorrupted
+//}
+//
+//func readFile(fileName: String) throws {
+//    print("Opening file")
+//    
+//    defer {
+//        print("Closing file")
+//    }
+//    
+//    defer {
+//        print("Ready to clear up this mess!")
+//    }
+//    
+//    if fileName.isEmpty {
+//        throw FileReadError.FileNotFound
+//    }
+//    
+//    // Arbitrary character count
+//    if fileName.characters.count < 3 {
+//        throw FileReadError.FileCorrupted
+//    }
+//    
+////    print("Successfully read file!")
+//}
+//
+//try readFile("")
+////try readFile("t1")
+////try readFile("README.txt")
+//
+//: Partial capturing of exceptions
 
-enum FileReadError: ErrorType {
-    case FileNotFound
-    case FileCorrupted
+enum PrinterError: ErrorType {
+    case OutOfInk
 }
 
-func readFile(fileName: String) throws {
-    print("Opening file")
-    
-    defer {
-        print("Closing file")
-    }
-    
-    defer {
-        print("Ready to clear up this mess!")
-    }
-    
-    if fileName.isEmpty {
-        throw FileReadError.FileNotFound
-    }
-    
-    // Arbitrary character count
-    if fileName.characters.count < 3 {
-        throw FileReadError.FileCorrupted
-    }
-    
-    print("Successfully read file!")
+func print() throws -> String {
+    throw PrinterError.OutOfInk
 }
 
-try readFile("")
-//try readFile("t1")
-//try readFile("README.txt")
+func performPrintOperation(operation: () throws -> String) rethrows {
+    try operation()
+}
+
+func clickPrintMenuItem() {
+    do {
+        try performPrintOperation(print)
+    }
+    catch PrinterError.OutOfInk {
+        Swift.print("Out of ink!")
+    }
+    catch {
+        Swift.print("Unrecognized error")
+    }
+}
+
+clickPrintMenuItem()
 
 //: [Next](@next)

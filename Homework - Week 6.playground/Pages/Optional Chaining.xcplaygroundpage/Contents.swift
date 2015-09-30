@@ -5,15 +5,6 @@ struct Point {
     var y: CGFloat
 }
 
-let p = Point(x: 10, y: 10)
-
-let mirror = Mirror(reflecting: p)
-for child in mirror.children {
-    let (key, value) = child
-    print(key)
-    print(value)
-}
-
 //: Basic Optional Chaining
 struct Square {
     var point: Point?
