@@ -1,6 +1,6 @@
 //: # Homework - Week 7
 //: __________
-//:## Protocols
+//:## Extensions
 //: Let's add a method to `String` that appends a happy face
 extension String
 {
