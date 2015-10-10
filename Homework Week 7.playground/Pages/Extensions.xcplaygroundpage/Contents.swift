@@ -1,5 +1,6 @@
 //: # Homework - Week 7
-
+//: __________
+//:## Protocols
 //: Let's add a method to `String` that appends a happy face
 extension String
 {
@@ -12,7 +13,6 @@ extension String
 
 var happyString = "I'm feeling happy happy happy"
 happyString.appendMrHappy()
-
 
 //: That was just spiffing! Let's try something a bit stranger...
 //: _________
