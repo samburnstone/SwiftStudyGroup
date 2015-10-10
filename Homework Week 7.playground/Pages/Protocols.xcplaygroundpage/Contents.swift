@@ -105,4 +105,29 @@ let sam = Person(name: "Sam")
 sam.printableDescription
 sam.prettyPrintableDescription
 
+//: Protocol composition
+//: __________
+//: We can force a parameter/property to conform to multiple specific protocols
+protocol DeveloperType {}
+
+protocol Named
+{
+    var name: String { get }
+}
+
+struct Developer {
+    let name: String
+}
+
+extension Developer: Named {}
+extension Developer: DeveloperType {}
+
+func learnNewProgrammingSkill(developer: protocol<Named, DeveloperType>)
+{
+    print("Greetings \(developer.name)! Have you tried React Native? It's the new fish in the sea!")
+}
+
+let developer = Developer(name: "Nerd") // Note, that if we declared the type to be 'DeveloperType' or 'Named' then we'd get a compiler error when passing the constant to the function
+learnNewProgrammingSkill(developer)
+
 //: [Next](@next)
