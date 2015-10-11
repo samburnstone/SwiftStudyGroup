@@ -186,4 +186,47 @@ struct WindowPrepender: WindowInserter
 
 WindowAppender().hasPointsRemainingToWindow()
 WindowPrepender().hasPointsRemainingToWindow()
+
+//: Add Constraints to Protocols
+
+protocol RecipeIngredientType
+{
+    var item: String { get }
+    var amount: UInt { get }
+}
+
+struct Ingredient: RecipeIngredientType
+{
+    let item: String
+    let amount: UInt
+}
+
+let recipeItems = [
+    Ingredient(item: "Eggs", amount: 6),
+    Ingredient(item: "Sugar", amount: 200),
+    Ingredient(item: "Baked Beans", amount: 56),
+    Ingredient(item: "Birds-Eye Chilli", amount: 150)
+]
+
+//: We'll add an extension to any collection type, but add a constraint that the type of `Generator.Element` must conform to `RecipeIngredientType`
+//: __________
+//: Note that `Generator` is a type that encapsulates the collection's iteration state, while `Generator.Element` is the type 'generated' by the Generator (i.e. the type of the items included within the collection)
+extension CollectionType where Generator.Element: RecipeIngredientType
+{
+    func asBulletedList() -> String
+    {
+        var bulletedString: String = ""
+        
+        for ingredient: RecipeIngredientType in self
+        {
+            bulletedString += "• \(ingredient.amount) x \(ingredient.item)\n"
+        }
+        
+        return bulletedString
+    }
+}
+
+recipeItems.asBulletedList()
+
+
 //: [Next](@next)
