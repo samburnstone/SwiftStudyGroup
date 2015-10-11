@@ -148,4 +148,42 @@ var doubleValue = -3.0
 
 integerValue.flip()
 doubleValue.flip()
+
+//: Default Protocol Implementations
+//: _________
+//: Example based on something I noticed when working on Enterprise Charts - want a small amount of shared code between two protocol implementations without having to implement classes and add `fatalError("Implement in subclass")`
+protocol WindowInserter
+{
+    func numberOfPointsInNextWindow() -> UInt
+    func hasPointsRemainingToWindow() -> Bool
+}
+
+//: Extend protocol with default implementation of method
+extension WindowInserter
+{
+    func hasPointsRemainingToWindow() -> Bool
+    {
+        return numberOfPointsInNextWindow() > 0
+    }
+}
+
+struct WindowAppender: WindowInserter
+{
+    func numberOfPointsInNextWindow() -> UInt
+    {
+        return 100
+    }
+    // Notice how we don't have to implement `hasPointsRemainingToWindow`?
+}
+
+struct WindowPrepender: WindowInserter
+{
+    func numberOfPointsInNextWindow() -> UInt
+    {
+        return 0
+    }
+}
+
+WindowAppender().hasPointsRemainingToWindow()
+WindowPrepender().hasPointsRemainingToWindow()
 //: [Next](@next)
