@@ -130,4 +130,22 @@ func learnNewProgrammingSkill(developer: protocol<Named, DeveloperType>)
 let developer = Developer(name: "Nerd") // Note, that if we declared the type to be 'DeveloperType' or 'Named' then we'd get a compiler error when passing the constant to the function
 learnNewProgrammingSkill(developer)
 
+//: Extending Protocols
+//: ________
+//: Let's add a method to `SignedIntegerType` which just simply flips the sign of the value (i.e. negative number becomes positive counterpart and vice versa).
+//: `SignedNumberType` defines `prefix func -(x: Self) -> Self` which we make use of to get the 'flipped' value
+extension SignedNumberType
+{
+    func flip() -> Self
+    {
+        return -self;
+    }
+}
+
+//: We can now use this method on any type that conforms to `SignedIntegerType` e.g. `Float`, `Int, `Double`, e.t.c
+var integerValue = 10
+var doubleValue = -3.0
+
+integerValue.flip()
+doubleValue.flip()
 //: [Next](@next)
