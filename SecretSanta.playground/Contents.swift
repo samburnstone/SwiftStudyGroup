@@ -22,6 +22,7 @@ func test_error_thrown_when_generating_with_participant_count_of_1()
     catch SecretSantaGenerator.Error.TooFewParticipants // Not sure whether a nested error type is the best way to go about this
     {
         print("Too few participants")
+        print("\(__FUNCTION__) ✔︎")
     }
     catch {}
 }
@@ -35,6 +36,7 @@ func test_generation_not_possible_when_all_participants_from_same_family()
     do
     {
         try santa.generatePairingsFromParticipants([ryan, stu])
+        print("\(__FUNCTION__) ✔︎")
     }
     catch SecretSantaGenerator.Error.AllParticipantsHaveSameName
     {
@@ -50,6 +52,7 @@ func test_generation_is_possible_when_all_participants_from_different_families()
     {
         let pairings = try santa.generatePairingsFromParticipants(people)
         print(pairings)
+        print("\(__FUNCTION__) ✔︎")
     }
     catch SecretSantaGenerator.Error.AllParticipantsHaveSameName
     {
