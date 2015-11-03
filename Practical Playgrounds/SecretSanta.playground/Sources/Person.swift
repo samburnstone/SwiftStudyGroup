@@ -19,7 +19,7 @@ public struct Person
 extension Person: CustomStringConvertible
 {
     public var description: String
-        {
-            return "\(firstName) \(lastName)"
+    {
+        return "\(firstName) \(lastName)"
     }
 }
