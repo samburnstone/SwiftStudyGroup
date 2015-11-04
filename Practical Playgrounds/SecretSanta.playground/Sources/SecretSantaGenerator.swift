@@ -59,6 +59,7 @@ public struct SecretSantaGenerator
     func buildPairingsListFromCircularArray(circularArray: [Person]) -> [Pairing]
     {
         var pairings = [Pairing]()
+        
         for i in 0..<(circularArray.count - 1)
         {
             let giver = circularArray[i]
@@ -138,6 +139,7 @@ private struct FamilyStore
         updateFamily(participantsFamily!)
     }
     
+    // This is required due to us defining `Family` as a struct. Any changes we make to the Family will be written to a copy of the original family, therefore we need to replace the previous family with the newly amend instance
     mutating func updateFamily(family: Family)
     {
         guard let index = families.indexOf(family) else { return }

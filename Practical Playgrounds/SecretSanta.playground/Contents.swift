@@ -1,12 +1,7 @@
 //:# Secret Santa
 
 //: Test shuffle method
-var people = [Person(firstName: "Ryan", lastName: "Grey", email: "rgrey@scottlogic.com"),
-                Person(firstName: "Rob", lastName: "Pilling", email: "rpilling@scottlogic.com"),
-                Person(firstName: "Andy", lastName: "Polkinghorn", email: "apolkinghorn@scottlogic.com"),
-                Person(firstName: "Chris", lastName: "Grant", email: "cgrant@scottlogic.com"),
-                Person(firstName: "Sam", lastName: "Burnstone", email: "sburnstone@scottlogic.com")
-                ];
+
 
 let santa = SecretSantaGenerator()
 
@@ -86,6 +81,13 @@ func test_generation_is_possible_when_half_of_participants_do_not_share_family_n
 // Valid participants -> test secret santa list generated
 func test_generation_is_possible_when_all_participants_from_different_families()
 {
+    let people = [Person(firstName: "Ryan", lastName: "Grey", email: "rgrey@scottlogic.com"),
+        Person(firstName: "Rob", lastName: "Pilling", email: "rpilling@scottlogic.com"),
+        Person(firstName: "Andy", lastName: "Polkinghorn", email: "apolkinghorn@scottlogic.com"),
+        Person(firstName: "Chris", lastName: "Grant", email: "cgrant@scottlogic.com"),
+        Person(firstName: "Sam", lastName: "Burnstone", email: "sburnstone@scottlogic.com")
+    ];
+    
     do
     {
         print(try santa.generatePairingsFromParticipants(people))
