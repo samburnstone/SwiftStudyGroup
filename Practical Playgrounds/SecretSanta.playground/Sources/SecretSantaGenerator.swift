@@ -140,6 +140,8 @@ private struct FamilyStore
     }
     
     // This is required due to us defining `Family` as a struct. Any changes we make to the Family will be written to a copy of the original family, therefore we need to replace the previous family with the newly amend instance
+    // This is an interesting read on the issue of using Structs everywhere: http://faq.sealedabstract.com/structs_or_classes/
+    // Note for future: We'd perhaps have beeen better off defining `Family` as a class, yet maintaining Person as a struct.
     mutating func updateFamily(family: Family)
     {
         guard let index = families.indexOf(family) else { return }
