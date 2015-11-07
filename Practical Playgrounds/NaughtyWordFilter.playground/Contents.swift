@@ -45,7 +45,11 @@ func test_docile_message_results_in_no_flagged_words()
 
 //: Run the tests
 
-/// Basic method that prints out a nicely formatted string to the console depending on value passed as `condition` parameter
+/*:
+ Basic method that prints out a nicely formatted string to the console depending on value passed as `condition` parameter
+
+ To be ensure the `__FUNCTION__` identifier expands to evaluate to the test that calls this method we define it as a default argument - see: https://developer.apple.com/swift/blog/?id=15
+*/
 func samAssertTrue(@autoclosure conditon: () -> Bool, methodName: String = __FUNCTION__)
 {
     let icon = conditon() ? "✔︎" : "✖️"
