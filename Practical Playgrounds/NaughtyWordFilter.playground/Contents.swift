@@ -70,6 +70,18 @@ func test_range_of_flagged_word_at_end_of_message()
     samAssertTrue(substringWithGivenRange == "porcine")
 }
 
+func test_wordRedactor_replaces_banned_word_with_asterisks()
+{
+    let message = "Vote for corbyn"
+    
+    let flaggedWords = bannedWordsParser.parse(message) // Would probably mock the parser if we were doing 'proper' testing
+    
+    let redactor = WordRedactor()
+    let redactedMessage = redactor.santiseMessage(message, bannedWords: flaggedWords)
+    
+    samAssertTrue(redactedMessage == "Vote for ******")
+}
+
 //: Run the tests
 
 /*:
@@ -95,3 +107,6 @@ test_parsing_of_enemy_propaganda_message_results_in_two_flagged_words()
 test_range_of_flagged_word_at_beginning_of_message()
 test_range_of_flagged_word_in_middle_of_message()
 test_range_of_flagged_word_at_end_of_message()
+
+// Word sanistisers
+test_wordRedactor_replaces_banned_word_with_asterisks()
