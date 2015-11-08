@@ -23,7 +23,7 @@ class BannedWordsParser
 
 //:## Banned Words Tests
 
-let naughtyWords = ["corbyn", "porcine", "nhs"]
+let naughtyWords = ["corbyn", "porcine", "pilling"]
 
 let bannedWordsParser = BannedWordsParser(bannedWordsList: naughtyWords)
 
