@@ -72,6 +72,46 @@ func test_parsing_of_enemy_propaganda_message_results_in_two_flagged_words()
     
     samAssertTrue(bannedWords.count == 2)
 }
+
+func test_range_of_flagged_word_at_beginning_of_message()
+{
+    let message = "pilling is a fool"
+    
+    let bannedWords = bannedWordsParser.parse(message)
+    
+    let range = bannedWords[0].range
+    
+    let substringWithGivenRange = message.substringWithRange(range)
+    
+    samAssertTrue(substringWithGivenRange == "pilling")
+}
+
+func test_range_of_flagged_word_in_middle_of_message()
+{
+    let message = "fifty reasons why corbyn is..."
+    
+    let bannedWords = bannedWordsParser.parse(message)
+    
+    let range = bannedWords[0].range
+    
+    let substringWithGivenRange = message.substringWithRange(range)
+    
+    samAssertTrue(substringWithGivenRange == "corbyn")
+}
+
+func test_range_of_flagged_word_at_end_of_message()
+{
+    let message = "porcine porcine porcine"
+    
+    let bannedWords = bannedWordsParser.parse(message)
+    
+    let range = bannedWords[2].range
+    
+    let substringWithGivenRange = message.substringWithRange(range)
+    
+    samAssertTrue(substringWithGivenRange == "porcine")
+}
+
 //: Run the tests
 
 /*:
@@ -92,3 +132,8 @@ print("\nRunning tests...\n")
 test_parsing_of_empty_message_results_in_no_flagged_words()
 test_parsing_of_docile_message_results_in_no_flagged_words()
 test_parsing_of_enemy_propaganda_message_results_in_three_flagged_words()
+
+// Range calculation tests
+test_range_of_flagged_word_at_beginning_of_message()
+test_range_of_flagged_word_in_middle_of_message()
+test_range_of_flagged_word_at_end_of_message()
