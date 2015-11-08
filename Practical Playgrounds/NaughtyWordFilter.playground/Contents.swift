@@ -64,6 +64,14 @@ func test_parsing_of_docile_message_results_in_no_flagged_words()
     samAssertTrue(bannedWords.count == 0)
 }
 
+func test_parsing_of_enemy_propaganda_message_results_in_two_flagged_words()
+{
+    let message = "We believe in Corbyn for he is our saviour from the porcine lovers"
+    
+    let bannedWords = bannedWordsParser.parse(message)
+    
+    samAssertTrue(bannedWords.count == 2)
+}
 //: Run the tests
 
 /*:
