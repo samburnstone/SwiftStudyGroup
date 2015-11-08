@@ -39,7 +39,6 @@ class BannedWordsParser
         
         return flaggedWordTokens
     }
-    
 }
 
 //:## Banned Words Tests
