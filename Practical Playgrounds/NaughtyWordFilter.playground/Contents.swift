@@ -131,7 +131,7 @@ print("\nRunning tests...\n")
 // Message parsing tests
 test_parsing_of_empty_message_results_in_no_flagged_words()
 test_parsing_of_docile_message_results_in_no_flagged_words()
-test_parsing_of_enemy_propaganda_message_results_in_three_flagged_words()
+test_parsing_of_enemy_propaganda_message_results_in_two_flagged_words()
 
 // Range calculation tests
 test_range_of_flagged_word_at_beginning_of_message()
