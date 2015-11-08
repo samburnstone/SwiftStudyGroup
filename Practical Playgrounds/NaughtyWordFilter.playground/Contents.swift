@@ -27,14 +27,14 @@ let naughtyWords = ["corbyn", "porcine", "nhs"]
 
 let bannedWordsParser = BannedWordsParser(bannedWordsList: naughtyWords)
 
-func test_empty_message_results_in_no_flagged_words()
+func test_parsing_of_empty_message_results_in_no_flagged_words()
 {
     let bannedWords = bannedWordsParser.parse("")
     
     samAssertTrue(bannedWords.count == 0)
 }
 
-func test_docile_message_results_in_no_flagged_words()
+func test_parsing_of_docile_message_results_in_no_flagged_words()
 {
     let message = "Bunny rabbits are fluffy!"
     
@@ -58,5 +58,8 @@ func samAssertTrue(@autoclosure conditon: () -> Bool, methodName: String = __FUN
 }
 
 print("\nRunning tests...\n")
-test_empty_message_results_in_no_flagged_words()
-test_docile_message_results_in_no_flagged_words()
+
+// Message parsing tests
+test_parsing_of_empty_message_results_in_no_flagged_words()
+test_parsing_of_docile_message_results_in_no_flagged_words()
+test_parsing_of_enemy_propaganda_message_results_in_three_flagged_words()
