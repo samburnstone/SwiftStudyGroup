@@ -93,7 +93,7 @@ func test_wordStrikeThroughHighlighter_strikes_through_banned_word()
     
     let strikeThrougher = WordStrikeThroughHighlighter()
     
-    let struckThroughMessage = strikeThrougher.highlightWordsInMessage(message, flaggedWordTokens: flaggedWords)
+    let struckThroughMessage = strikeThrougher.highlightWordsInMessage(NSAttributedString(string: message), flaggedWordTokens: flaggedWords)
     
     let expected = NSMutableAttributedString(string: message)
     expected.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(integer: 2), range: NSMakeRange(9, 6))
@@ -109,12 +109,29 @@ func test_wordRedHighlighter_applies_red_font_to_banned_word()
     
     let redWordHighlighter = WordRedHighlighter()
     
-    let redHighlightedText = redWordHighlighter.highlightWordsInMessage(message, flaggedWordTokens: flaggedWords)
+    let redHighlightedText = redWordHighlighter.highlightWordsInMessage(NSAttributedString(string: message), flaggedWordTokens: flaggedWords)
 
     let expected = NSMutableAttributedString(string: message)
     expected.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(9, 6))
     
     samAssertTrue(redHighlightedText.isEqualToAttributedString(expected))
+}
+
+func test_chaning_of_wordFilters()
+{
+    let message = "Vote for corbyn"
+    
+    let flaggedWords = bannedWordsParser.parse(message)
+    
+    WordStrikeThroughHighlighter().highlightWordsInMessage(
+        WordRedHighlighter().highlightWordsInMessage(
+            NSAttributedString(string:
+                WordRedactor().santiseMessage(message, bannedWords: flaggedWords)
+            )
+            , flaggedWordTokens: flaggedWords
+        )
+        , flaggedWordTokens: flaggedWords)
+   print("\(__FUNCTION__) ⚠️ - requires manual verification")
 }
 
 //: Run the tests
@@ -147,3 +164,4 @@ test_range_of_flagged_word_at_end_of_message()
 test_wordRedactor_replaces_banned_word_with_asterisks()
 test_wordStrikeThroughHighlighter_strikes_through_banned_word()
 test_wordRedHighlighter_applies_red_font_to_banned_word()
+test_chaning_of_wordFilters()

@@ -3,20 +3,20 @@ import UIKit
 
 public protocol WordHighlighter
 {
-    func highlightWordsInMessage(message: String, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
+    func highlightWordsInMessage(message: NSAttributedString, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
 }
 
 public class WordStrikeThroughHighlighter: WordHighlighter
 {
     public init() {}
     
-    public func highlightWordsInMessage(message: String, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
+    public func highlightWordsInMessage(message: NSAttributedString, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
     {
-        let highlightedMessage = NSMutableAttributedString(string: message)
+        let highlightedMessage = NSMutableAttributedString(attributedString: message)
         
         for flaggedWord in flaggedWordTokens
         {
-            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message)
+            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message.string)
             highlightedMessage.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(integer: 2), range: range)
         }
         
@@ -29,13 +29,13 @@ public class WordRedHighlighter: WordHighlighter
 {
     public init() {}
     
-    public func highlightWordsInMessage(message: String, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
+    public func highlightWordsInMessage(message: NSAttributedString, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
     {
-        let highlightedMessage = NSMutableAttributedString(string: message)
+        let highlightedMessage = NSMutableAttributedString(attributedString: message)
         
         for flaggedWord in flaggedWordTokens
         {
-            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message)
+            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message.string)
             highlightedMessage.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: range)
         }
         
