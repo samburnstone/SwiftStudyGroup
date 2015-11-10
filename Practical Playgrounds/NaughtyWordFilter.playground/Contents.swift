@@ -101,6 +101,22 @@ func test_wordStrikeThroughHighlighter_strikes_through_banned_word()
     samAssertTrue(struckThroughMessage.isEqualToAttributedString(expected))
 }
 
+func test_wordRedHighlighter_applies_red_font_to_banned_word()
+{
+    let message = "Vote for corbyn"
+    
+    let flaggedWords = bannedWordsParser.parse(message)
+    
+    let redWordHighlighter = WordRedHighlighter()
+    
+    let redHighlightedText = redWordHighlighter.highlightWordsInMessage(message, flaggedWordTokens: flaggedWords)
+
+    let expected = NSMutableAttributedString(string: message)
+    expected.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(9, 6))
+    
+    samAssertTrue(redHighlightedText.isEqualToAttributedString(expected))
+}
+
 //: Run the tests
 
 /*:
@@ -130,3 +146,4 @@ test_range_of_flagged_word_at_end_of_message()
 // Word sanistisers
 test_wordRedactor_replaces_banned_word_with_asterisks()
 test_wordStrikeThroughHighlighter_strikes_through_banned_word()
+test_wordRedHighlighter_applies_red_font_to_banned_word()

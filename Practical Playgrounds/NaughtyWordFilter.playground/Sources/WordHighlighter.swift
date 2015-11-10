@@ -25,3 +25,23 @@ public class WordStrikeThroughHighlighter: WordHighlighter
         return NSAttributedString(attributedString: highlightedMessage)
     }
 }
+
+public class WordRedHighlighter: WordHighlighter
+{
+    public init() {}
+    
+    public func highlightWordsInMessage(message: String, flaggedWordTokens: [FlaggedWordToken]) -> NSAttributedString
+    {
+        let highlightedMessage = NSMutableAttributedString(string: message)
+        
+        for flaggedWord in flaggedWordTokens
+        {
+            let startIndex = message.startIndex.distanceTo(flaggedWord.range.startIndex)
+            let endIndex = flaggedWord.range.startIndex.distanceTo(flaggedWord.range.endIndex)
+            highlightedMessage.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(startIndex, endIndex))
+        }
+        
+        // Return an immutable attributed string
+        return NSAttributedString(attributedString: highlightedMessage)
+    }
+}
