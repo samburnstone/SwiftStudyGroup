@@ -1,3 +1,5 @@
+import Foundation
+
 public protocol WordSanitiser
 {
     /// Modifies `message` based on banned words contained within `bannedWords` array
