@@ -16,9 +16,8 @@ public class WordStrikeThroughHighlighter: WordHighlighter
         
         for flaggedWord in flaggedWordTokens
         {
-            let startIndex = message.startIndex.distanceTo(flaggedWord.range.startIndex)
-            let endIndex = flaggedWord.range.startIndex.distanceTo(flaggedWord.range.endIndex)
-            highlightedMessage.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(integer: 2), range: NSMakeRange(startIndex, endIndex))
+            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message)
+            highlightedMessage.addAttribute(NSStrikethroughStyleAttributeName, value: NSNumber(integer: 2), range: range)
         }
         
         // Return an immutable attributed string
@@ -36,12 +35,21 @@ public class WordRedHighlighter: WordHighlighter
         
         for flaggedWord in flaggedWordTokens
         {
-            let startIndex = message.startIndex.distanceTo(flaggedWord.range.startIndex)
-            let endIndex = flaggedWord.range.startIndex.distanceTo(flaggedWord.range.endIndex)
-            highlightedMessage.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(startIndex, endIndex))
+            let range = RangeToLegacyRangeConverter.legacyRangeFromFlaggedWord(flaggedWord, message: message)
+            highlightedMessage.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: range)
         }
         
         // Return an immutable attributed string
         return NSAttributedString(attributedString: highlightedMessage)
+    }
+}
+
+struct RangeToLegacyRangeConverter
+{
+    static func legacyRangeFromFlaggedWord(flaggedWord: FlaggedWordToken, message: String) -> NSRange
+    {
+        let startIndex = message.startIndex.distanceTo(flaggedWord.range.startIndex)
+        let endIndex = flaggedWord.range.startIndex.distanceTo(flaggedWord.range.endIndex)
+        return NSMakeRange(startIndex, endIndex)
     }
 }
