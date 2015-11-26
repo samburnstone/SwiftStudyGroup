@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 
 //:## Banned Words Tests
+//: [Specification](http://rubyquiz.com/quiz9.html)
 
 let naughtyWords = ["corbyn", "porcine", "pilling"]
 
