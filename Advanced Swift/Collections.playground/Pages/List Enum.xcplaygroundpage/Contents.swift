@@ -52,10 +52,31 @@ extension List: StackType
     }
 }
 
+// Shall we conform to Sequence Type? Go on then...
+
+extension List: SequenceType
+{
+    func generate() -> AnyGenerator<Element>
+    {
+        var current = self
+        return AnyGenerator
+        {
+            current.pop() // Implicitly returns the result of `pop()`
+        }
+    }
+}
+
 // Let's test it out
 
-var l = List<Int>.End.cons(10).cons(20).cons(30)
+var list1 = List<Int>.End.cons(10).cons(20).cons(30)
 
-l.pop()
-l.pop()
-l.push(100)
+list1.pop()
+list1.pop()
+list1.push(100)
+
+let nameList = List<String>.End.cons("Andy").cons("Rob").cons("Sam")
+
+for name in nameList
+{
+    print("Hello \(name)")
+}
