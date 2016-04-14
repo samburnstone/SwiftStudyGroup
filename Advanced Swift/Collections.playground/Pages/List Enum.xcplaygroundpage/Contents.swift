@@ -1,3 +1,5 @@
+//: [Previous](@previous)
+
 //: Playground - noun: a place where people can play
 
 import UIKit
@@ -94,3 +96,5 @@ for name in nameList
 {
     print("Hello \(name)")
 }
+
+//: [Next](@next
