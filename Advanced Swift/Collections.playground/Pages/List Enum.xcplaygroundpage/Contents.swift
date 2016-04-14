@@ -11,6 +11,8 @@ protocol StackType
     mutating func push(Element: Element)
 }
 
+// Let's create a linked-list kind of thing
+
 enum List<Element>
 {
     case End
@@ -31,6 +33,8 @@ extension List
     }
 }
 
+// Make our list conform to StackType protocol so we can push and pop away
+
 extension List: StackType
 {
     mutating func pop() -> Element? {
@@ -47,6 +51,8 @@ extension List: StackType
         self = self.cons(element)
     }
 }
+
+// Let's test it out
 
 var l = List<Int>.End.cons(10).cons(20).cons(30)
 
