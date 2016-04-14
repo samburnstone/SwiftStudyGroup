@@ -66,7 +66,21 @@ extension List: SequenceType
     }
 }
 
-// Let's test it out
+// How about `ArrayLiteralConvertible`?
+
+extension List: ArrayLiteralConvertible
+{
+    // `Element...` is a variadic parameter
+    init(arrayLiteral elements: Element...)
+    {
+        self = elements.reverse().reduce(.End)
+        {
+            $0.cons($1)
+        }
+    }
+}
+
+// Let's test it out (use literal syntax)
 
 var list1 = List<Int>.End.cons(10).cons(20).cons(30)
 
@@ -74,7 +88,7 @@ list1.pop()
 list1.pop()
 list1.push(100)
 
-let nameList = List<String>.End.cons("Andy").cons("Rob").cons("Sam")
+let nameList: List = ["Andy", "Rob", "Sam"]
 
 for name in nameList
 {
